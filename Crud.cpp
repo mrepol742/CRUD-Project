@@ -2,51 +2,81 @@
 
 using namespace std;
 
+int cls = 1;
+bool isDebug = true;
 
-class students {
+class Students {
 
-  protected:
-      char name[20];
-      int yearLevel;
-      char campus[20];
-      char program[20];
-      char city[20];
-      char emailAddress[20];
+    int student number;
+    string name;
+    int yearLevel;
+    string campus;
+    string program;
+    string city;
+    string emailAddress;
 
-  public:
-      void setStudents() {
-         cout << "\n\t*** NEW STUDENTS **";
-
-      }
-
-      void getStudents() {
-         
-      }
+    public:
+    void putData();
+    void getData();
 };
 
-void create() {
+class LMS {
 
-}
+  public:
+    void create() {
+        Students students[230];
+        cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
+        cout << "\n\nName (Last Name, First Name, MI.): ";
+        cin >> Students::name;
+        if (isDebug) {
+            cout << ">> Entered name is " << Students::name;
+        }
+        cout << "\nYear Level: ";
+        cin >> Students::yearLevel;
+        if (isDebug) {
+            cout << ">> Entered year level is " << Students::yearLevel;
+        }
+        cout << "\nCampus: ";
+        cin >> Students::campus;
+        if (isDebug) {
+            cout << ">> Entered campus is " << Students::campus;
+        }
+        cout << "\nProgram/Course: ";
+        cin >> Students::program;
+        if (isDebug) {
+            cout << ">> Entered program/course is " << Students::program;
+        }
+        cout << "\nCity: ";
+        cin >> Students::city;
+        if (isDebug) {
+            cout << ">> Entered city is " << Students::city;
+        }
+        cout << "\nEmail Address: ";
+        cin >> Students::emailAddress;
+        if (isDebug) {
+            cout << ">> Entered email address is " << Students::emailAddress;
+        }
+    }
 
-void read() {
+    void read() {
 
-}
+    }
 
-void update() {
+    void update() {
 
-}
+    }
 
-void deleteA() {
+    void deleteA() {
 
-}
-
-int cls = 1;
+    }
+};
 
 int main() {
+   LMS lms;
    if (cls) {
        cout << "\033[2J\033[1;1H";
    }
-   cout << "\n\n\t\033[1;31mLearning Module System (LMS)\033[0m\n\tA simple program in managing\n\tstudents LMS accounts.";
+   cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m\n\tA simple program in managing students LMS accounts.";
    cout << "\n\n\t--------------------------------------------------";
    cout << "\n\t| [1] Add New Students\t[2] Display All Students |\n\t| [3] Update Students\t[4] Delete Students      |\n\t| [5] Exit                                       |";
    cout << "\n\t--------------------------------------------------";
@@ -54,16 +84,14 @@ int main() {
    int num;
    cin >> num;
    if (num == 1) {
-       create();
-   } else if (num == 2) {
-       read();cout<<"\n\nEnter name :- ";
-    cin>>name;
-    cout<<"\nEnter code :- ";
-    cin>>code;
+       lms.create();
+   } else if (
+       num == 2) {
+       lms.read();
    } else if (num == 3) {
-       update();
+       lms.update();
    } else if (num == 4) {
-       deleteA();
+       lms.deleteA();
    } else if (num == 5) {
        return 0;
    } else {
