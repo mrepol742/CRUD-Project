@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iterator>
 
 using namespace std;
 
@@ -7,7 +8,7 @@ bool isDebug = true;
 
 class Students {
 
-    int student number;
+    int studentNumber;
     string name;
     int yearLevel;
     string campus;
@@ -16,63 +17,80 @@ class Students {
     string emailAddress;
 
     public:
-    void putData();
-    void getData();
+    void create();
+    void read();
+    void update();
+    void deleteA();
 };
 
-class LMS {
+Students student[230];
+int main();
 
-  public:
-    void create() {
-        Students students[230];
+int size() {
+    int current = sizeof(student)/sizeof(student[0])/230;
+    if (current >= 1) {
+        return current - 1;
+    }
+    return current;
+}
+
+    void Students::create() {
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
         cout << "\n\nName (Last Name, First Name, MI.): ";
-        cin >> Students::name;
+        cin >> name;
         if (isDebug) {
-            cout << ">> Entered name is " << Students::name;
+            cout << ">> Entered name is " << name;
         }
         cout << "\nYear Level: ";
-        cin >> Students::yearLevel;
+        cin >> yearLevel;
         if (isDebug) {
-            cout << ">> Entered year level is " << Students::yearLevel;
+            cout << ">> Entered year level is " << yearLevel;
         }
         cout << "\nCampus: ";
-        cin >> Students::campus;
+        cin >> campus;
         if (isDebug) {
-            cout << ">> Entered campus is " << Students::campus;
+            cout << ">> Entered campus is " << campus;
         }
         cout << "\nProgram/Course: ";
-        cin >> Students::program;
+        cin >> program;
         if (isDebug) {
-            cout << ">> Entered program/course is " << Students::program;
+            cout << ">> Entered program/course is " << program;
         }
         cout << "\nCity: ";
-        cin >> Students::city;
+        cin >> city;
         if (isDebug) {
-            cout << ">> Entered city is " << Students::city;
+            cout << ">> Entered city is " << city;
         }
         cout << "\nEmail Address: ";
-        cin >> Students::emailAddress;
+        cin >> emailAddress;
         if (isDebug) {
-            cout << ">> Entered email address is " << Students::emailAddress;
+            cout << ">> Entered email address is " << emailAddress;
+        }
+        cout << "\nStudent successfully added.";
+        cout << "\nDo you want to add new student or continue to the menu? [Y/n] ";
+        char op;
+        cin >> op;
+        if (op == 'Y' || op == 'y') {
+            student[sizeof(student)/sizeof(student[0])/230].create();
+        } else {
+            main();
         }
     }
 
-    void read() {
+    void Students::read() {
+        cout << "\n" + name + "\t" << yearLevel << "\t\t" + campus + "\t" + program + "\t" + city + "\t" + emailAddress;
+    }
+
+    void Students::update() {
 
     }
 
-    void update() {
+    void Students::deleteA() {
 
     }
 
-    void deleteA() {
-
-    }
-};
 
 int main() {
-   LMS lms;
    if (cls) {
        cout << "\033[2J\033[1;1H";
    }
@@ -83,20 +101,30 @@ int main() {
    cout << "\n\n\tAction: ";
    int num;
    cin >> num;
+   cls = 0;
    if (num == 1) {
-       lms.create();
-   } else if (
-       num == 2) {
-       lms.read();
+       student[size()].create();
+   } else if (num == 2) {
+       cout << "\n\t\t   \033[1;31mDisplay Students\033[0m";
+       cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
+       for (int i = 0; i < sizeof(student)/sizeof(student[0])/230; i++) {
+           student[i].read();
+       }
+       cout << "\nDo you want to continue or exit? [Y/n] ";
+        char op;
+        cin >> op;
+        if (op == 'Y' || op == 'y') {
+            main();
+        } 
+        return 0;
    } else if (num == 3) {
-       lms.update();
+       student[size()].update();
    } else if (num == 4) {
-       lms.deleteA();
+       student[size()].deleteA();
    } else if (num == 5) {
        return 0;
    } else {
       cout << "\n\tInvalid action. Try again.";
-      cls = 0;
       main();
    }
    return 0;
