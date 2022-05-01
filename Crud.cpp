@@ -26,14 +26,6 @@ class Students {
 Students student[230];
 int main();
 
-int size() {
-    int current = sizeof(student)/sizeof(student[0])/230;
-    if (current >= 1) {
-        return current - 1;
-    }
-    return current;
-}
-
     void Students::create() {
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
         cout << "\n\nName (Last Name, First Name, MI.): ";
