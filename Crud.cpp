@@ -25,6 +25,7 @@ class Students {
 
 Students student[230];
 int main();
+int size();
 
     void Students::create() {
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
@@ -63,7 +64,7 @@ int main();
         char op;
         cin >> op;
         if (op == 'Y' || op == 'y') {
-            student[sizeof(student)/sizeof(student[0])/230].create();
+            student[size()+1].create();
         } else {
             main();
         }
@@ -81,6 +82,13 @@ int main();
 
     }
 
+int size() {
+    int sz = sizeof(student)/sizeof(student[230])/230;
+    if (isDebug) {
+           cout << ">> The size of array was " << sz;
+    }
+    return sz;
+}
 
 int main() {
    if (cls) {
@@ -95,14 +103,18 @@ int main() {
    cin >> num;
    cls = 0;
    if (num == 1) {
-       student[size()].create();
+       if (size() == 1) {
+           student[size()].create();
+       } else {
+           student[size()+1].create();
+       }
    } else if (num == 2) {
        cout << "\n\t\t   \033[1;31mDisplay Students\033[0m";
        cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
-       for (int i = 0; i < sizeof(student)/sizeof(student[0])/230; i++) {
+       for (int i = 0; i < size(); i++) {
            student[i].read();
        }
-       cout << "\nDo you want to continue or exit? [Y/n] ";
+       cout << "\nDo you want to continue? [Y/n] ";
         char op;
         cin >> op;
         if (op == 'Y' || op == 'y') {
@@ -110,9 +122,9 @@ int main() {
         } 
         return 0;
    } else if (num == 3) {
-       student[size()].update();
+       student[size()+1].update();
    } else if (num == 4) {
-       student[size()].deleteA();
+       student[size()+1].deleteA();
    } else if (num == 5) {
        return 0;
    } else {
