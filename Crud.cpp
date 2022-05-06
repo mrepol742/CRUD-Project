@@ -5,6 +5,7 @@ using namespace std;
 
 int cls = 1;
 bool isDebug = true;
+int dataLoc = 0;
 
 class Students {
 
@@ -17,78 +18,58 @@ class Students {
     string emailAddress;
 
     public:
-    void create();
-    void read();
-    void update();
-    void deleteA();
-};
-
-Students student[230];
-int main();
-int size();
-
-    void Students::create() {
+    int create(Students *student, int loc) {
+        student[loc].studentNumber = loc;
+        if (isDebug) {
+            cout << ">> Student number is " << student[loc].studentNumber;
+        }
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
         cout << "\n\nName (Last Name, First Name, MI.): ";
-        cin >> name;
+        cin >> student[loc].name;
         if (isDebug) {
-            cout << ">> Entered name is " << name;
+            cout << ">> Entered name is " << student[loc].name;
         }
         cout << "\nYear Level: ";
-        cin >> yearLevel;
+        cin >> student[loc].yearLevel;
         if (isDebug) {
-            cout << ">> Entered year level is " << yearLevel;
+            cout << ">> Entered year level is " << student[loc].yearLevel;
         }
         cout << "\nCampus: ";
-        cin >> campus;
+        cin >> student[loc].campus;
         if (isDebug) {
-            cout << ">> Entered campus is " << campus;
+            cout << ">> Entered campus is " << student[loc].campus;
         }
         cout << "\nProgram/Course: ";
-        cin >> program;
+        cin >> student[loc].program;
         if (isDebug) {
-            cout << ">> Entered program/course is " << program;
+            cout << ">> Entered program/course is " << student[loc].program;
         }
         cout << "\nCity: ";
-        cin >> city;
+        cin >> student[loc].city;
         if (isDebug) {
-            cout << ">> Entered city is " << city;
+            cout << ">> Entered city is " << student[loc].city;
         }
         cout << "\nEmail Address: ";
-        cin >> emailAddress;
+        cin >> student[loc].emailAddress;
         if (isDebug) {
-            cout << ">> Entered email address is " << emailAddress;
+            cout << ">> Entered email address is " << student[loc].emailAddress;
         }
         cout << "\nStudent successfully added.";
         cout << "\nDo you want to add new student or continue to the menu? [Y/n] ";
         char op;
         cin >> op;
+        dataLoc++;
         if (op == 'Y' || op == 'y') {
-            student[size()+1].create();
-        } else {
-            main();
+            return 1;
         }
+        return 0;
     }
+    void read(Students *student, int loc);
+    void update(Students *student, int loc);
+    void deleteA(Students *student, int loc);
+};
 
-    void Students::read() {
-        cout << "\n" + name + "\t" << yearLevel << "\t\t" + campus + "\t" + program + "\t" + city + "\t" + emailAddress;
-    }
-
-    void Students::update() {
-
-    }
-
-    void Students::deleteA() {
-
-    }
-
-int size() {
-    int sz = sizeof(student)/sizeof(student[230])/230;
-    if (isDebug) {
-           cout << ">> The size of array was " << sz;
-    }
-    return sz;
-}
+Students student[230];
 
 int main() {
    if (cls) {
@@ -103,16 +84,17 @@ int main() {
    cin >> num;
    cls = 0;
    if (num == 1) {
-       if (size() == 1) {
-           student[size()].create();
-       } else {
-           student[size()+1].create();
+       int con = 1;
+       while (con) {
+          if (student[dataLoc].create(student, dataLoc) != 1) {
+              main();
+          }
        }
    } else if (num == 2) {
        cout << "\n\t\t   \033[1;31mDisplay Students\033[0m";
        cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
-       for (int i = 0; i < size(); i++) {
-           student[i].read();
+       for (int i = 0; i < dataLoc; i++) {
+            
        }
        cout << "\nDo you want to continue? [Y/n] ";
         char op;
@@ -122,9 +104,9 @@ int main() {
         } 
         return 0;
    } else if (num == 3) {
-       student[size()+1].update();
+       
    } else if (num == 4) {
-       student[size()+1].deleteA();
+      
    } else if (num == 5) {
        return 0;
    } else {
