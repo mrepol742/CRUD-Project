@@ -28,7 +28,6 @@ int main();
 
 class Students {
 
-    int studentNumber;
     string name;
     int yearLevel;
     string campus;
@@ -38,10 +37,6 @@ class Students {
 
     public:
     int create(Students *student, int loc) {
-        student[loc].studentNumber = loc;
-        if (isDebug) {
-            cout << ">> Student number is " << student[loc].studentNumber;
-        }
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
         cout << "\n\nName (Last Name, First Name, MI.): ";
         cin >> student[loc].name;
@@ -74,69 +69,69 @@ class Students {
             cout << ">> Entered email address is " << student[loc].emailAddress;
         }
         cout << "\nStudent successfully added.";
-        cout << "\nDo you want to add new student or continue to the menu? [Y/n] ";
-        char op;
-        cin >> op;
+        cout << "\nDo you want to [1] Add another student, [2] Main Menu or [3] Exit: ";
         dataLoc++;
-        if (op == 'Y' || op == 'y') {
+        int op2;
+        cin >> op2;
+        if (op2 == 1) {
             return 1;
+        } else if (op2 == 3) {
+            exit(0);
         }
         return 0;
     }
+
     void read() {
-         cout << "\n" << studentNumber << ": " << name << " " << yearLevel << " " << campus << " " << program << " " << city << " " << emailAddress;
+         cout << "\n" << name << " " << yearLevel << " " << campus << " " << program << " " << city << " " << emailAddress;
     }
+
     void update(Students *student, int loc);
-    void deleteA(Students *student, int loc);
-    int getStudentNumber() {
-        return studentNumber;
-    }
 };
 
 Students student[230];
 
-void display() {
-    cout << "\n\t\t   \033[1;31mDisplay Students\033[0m";
-    cout << "\n\n\t----------------------------------------------------";
-    cout << "\n\t| [1] Display All Students \t[2] Find a Student |\n\t| [3] Main Menu\t                [4] Exit           |";
-    cout << "\n\t----------------------------------------------------";
+void readStudents() {
+    cout << "\n\t\t   \033[1;31mRead Students\033[0m";
+    cout << "\n\n\t--------------------------------------------";
+    cout << "\n\t| [1] All Students \t[2] Find a Student |\n\t| [3] Main Menu\t        [4] Exit           |";
+    cout << "\n\t--------------------------------------------";
     cout << "\n\n\tAction: ";
     int num2;
     cin >> num2;
     if (num2 == 1) {
-       cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
-       for (int i = 0; i < dataLoc; i++) {
-            student[i].read();
-       }
-       cout << "\n\tDo you want to [1] Main Menu [2] Exit: ";
-       int op;
-       cin >> op;
-       if (op == 1) {
-           main();
-       } 
-       exit(0);
+        cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
+        for (int i = 0; i < dataLoc; i++) {
+             student[i].read();
+        }
+        cout << "\n\tDo you want to [1] Main Menu or [2] Exit: ";
+        int op;
+        cin >> op;
+        if (op == 1) {
+            main();
+        } 
+        exit(0);
     } else if (num2 == 2) {
-       cout << "\tEnter student number: ";
-       int stun;
-       cin >> stun;
-       if (stun > dataLoc || stun < 0) {
-           cout << "\n\tStudent doesn't exists. Try again.";
-       } else {
-           cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
-           student[stun].read();
-       }
-       display();
+        cout << "\tEnter student number: ";
+        int stun;
+        cin >> stun;
+        if (stun > dataLoc || stun < 0) {
+            cout << "\n\tStudent doesn't exists. Try again.";
+        } else {
+            cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
+            student[stun].read();
+        }
+        readStudents();
     } else if (num2 == 3) {
         main();
     } else if (num2 == 4) {
         exit(0);
     } else {
         cout << "\n\tInvalid action. Try again.";
-        display();
+        readStudents();
     }
 }
 
-void add() {
+void addStudents() {
     int con = 1;
     while (con) {
         if (student[dataLoc].create(student, dataLoc) != 1) {
@@ -146,22 +141,22 @@ void add() {
     }
 }
 
-void deleteA() {
+void deleteStudents() {
     cout << "\tEnter student number: ";
     int stun;
     cin >> stun;
     if (stun > dataLoc || stun < 0) {
-        cout << "\n\tStudent doesn't exists. Try again.";
-        deleteA();
+        cout << "\tStudent doesn't exists. Try again.\n\n";
+        deleteStudents();
     } else {
         cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
         student[stun].read();
-        cout << "\tConfirmation for data deletion [Y/n]: ";
+        cout << "\n\tConfirmation for data deletion [Y/n]: ";
         char op;
         cin >> op;
         if (op == 'Y' || op == 'y') {
             for (int i = 0; i < dataLoc; i++) {
-                if (student[i].getStudentNumber() == stun) {
+                if (i == stun) {
                     if (i < dataLoc) {
                         dataLoc--;
                         for (int j = i; j < dataLoc; j++) {
@@ -170,18 +165,19 @@ void deleteA() {
                     }
                 } 
             }
+            cout << "\tSuccessfully deleted...";
+        } else {
+            cout << "\tDeletion aborted...";
+        }
+        cout << "\n\tDo you want to [1] Delete another data, [2] Main Menu or [3] Exit: ";
+        int op2;
+        cin >> op2;
+        if (op2 == 1) {
+            deleteStudents();
+        } else if (op2 == 2) {
             main();
         } else {
-            cout << "\tdeletion aborted...\n\tDo you want to [1] Delete another data or [2] Main Menu [3] Exit: ";
-            int op2;
-            cin >> op2;
-            if (op2 == 1) {
-                deleteA();
-            } else if (op2 == 2) {
-                main();
-            } else {
-                exit(0);
-            }
+            exit(0);
         }
     }
 }
@@ -191,21 +187,21 @@ int main() {
        cout << "\033[2J\033[1;1H";
    }
    cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m\n\tA simple program in managing students LMS accounts.";
-   cout << "\n\n\t--------------------------------------------------";
-   cout << "\n\t| [1] Add New Students\t[2] List Students        |\n\t| [3] Update Students\t[4] Delete Students      |\n\t| [5] Exit                                       |";
-   cout << "\n\t--------------------------------------------------";
+   cout << "\n\n\t---------------------------------------------";
+   cout << "\n\t| [1] Add New Students\t[2] List Students   |\n\t| [3] Update Students\t[4] Delete Students |\n\t| [5] Exit                                  |";
+   cout << "\n\t---------------------------------------------";
    cout << "\n\n\tAction: ";
    int num;
    cin >> num;
    cls = 0;
    if (num == 1) {
-       add();
+       addStudents();
    } else if (num == 2) {
-       display();
+       readStudents();
    } else if (num == 3) {
        
    } else if (num == 4) {
-       deleteA();
+       deleteStudents();
    } else if (num == 5) {
        return 0;
    } else {
