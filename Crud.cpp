@@ -64,7 +64,9 @@ class Students {
         }
         return 0;
     }
-    void read(Students *student, int loc);
+    void read() {
+         cout << "\n" << studentNumber << ": " << name << " " << yearLevel << " " << campus << " " << program << " " << city << " " << emailAddress;
+    }
     void update(Students *student, int loc);
     void deleteA(Students *student, int loc);
 };
@@ -88,21 +90,22 @@ int main() {
        while (con) {
           if (student[dataLoc].create(student, dataLoc) != 1) {
               main();
+              con = 0;
           }
        }
    } else if (num == 2) {
        cout << "\n\t\t   \033[1;31mDisplay Students\033[0m";
        cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
        for (int i = 0; i < dataLoc; i++) {
-            
+            student[i].read();
        }
        cout << "\nDo you want to continue? [Y/n] ";
-        char op;
-        cin >> op;
-        if (op == 'Y' || op == 'y') {
-            main();
-        } 
-        return 0;
+       char op;
+       cin >> op;
+       if (op == 'Y' || op == 'y') {
+           main();
+       } 
+       return 0;
    } else if (num == 3) {
        
    } else if (num == 4) {
