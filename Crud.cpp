@@ -85,13 +85,28 @@ class Students {
          cout << "\n" << name << " " << yearLevel << " " << campus << " " << program << " " << city << " " << emailAddress;
     }
 
-    void update(Students *student, int loc);
+    void update(Students *student, int loc, int type, string newName, int newYearLevel) {
+        if (type == 1) {
+            student[loc].name = newName;
+        } else if (type == 2) {
+            student[loc].yearLevel = newYearLevel;
+        } else if (type == 3) {
+            student[loc].campus = newName;
+        } else if (type == 4) {
+            student[loc].program = newName;
+        } else if (type == 5) {
+            student[loc].city = newName;
+        } else if (type == 6) {
+            student[loc].emailAddress = newName;
+        }
+    }
+
 };
 
 Students student[230];
 
 void readStudents() {
-    cout << "\n\t\t   \033[1;31mRead Students\033[0m";
+    cout << "\n\t\t   \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
     cout << "\n\n\t--------------------------------------------";
     cout << "\n\t| [1] All Students \t[2] Find a Student |\n\t| [3] Main Menu\t        [4] Exit           |";
     cout << "\n\t--------------------------------------------";
@@ -182,6 +197,162 @@ void deleteStudents() {
     }
 }
 
+void updateStudents() {
+    cout << "\n\t\t   \033[1;31mUpdate Students\033[0m\n\tUpdate Students LMS informations.";
+    cout << "\n\n\t-----------------------------------";
+    cout << "\n\t| [1] Name \t[2] Year Level    |\n\t| [3] Campus\t[4] Program       |\n\t| [5] City\t[6] Email Address |\n\t| [7] Main Menu\t[8] Exit          |";
+    cout << "\n\t-----------------------------------";
+    cout << "\n\n\tAction: ";
+    int num2;
+    cin >> num2;
+    cout << "\tEnter student number: ";
+    int snum;
+    cin >> snum;
+    string newName;
+    char choices;
+    int newYearLevel;
+    switch (num2) {
+        case 1:
+            cout << "\n\tEnter Name: ";
+            cin >> newName;
+            cout << "\n\tConfirmation for data update [Y/n]: ";
+            cin >> choices;
+            if (choices == 'Y' || choices == 'y') {
+                student[snum].update(student, snum, 1, newName, 0);
+                cout << "\tSuccessfully updated...";
+            } else {
+                cout << "\tUpdate aborted...";
+            }
+            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            int op2;
+            cin >> op2;
+            if (op2 == 1) {
+                updateStudents();
+            } else if (op2 == 2) {
+                main();
+            } else {
+                exit(0);
+            }
+        break;
+        case 2:
+            cout << "\n\tEnter Year Level: ";
+            cin >> newYearLevel;
+            cout << "\n\tConfirmation for data update [Y/n]: ";
+            cin >> choices;
+            if (choices == 'Y' || choices == 'y') {
+                student[snum].update(student, snum, 2, "", newYearLevel);
+                cout << "\tSuccessfully updated...";
+            } else {
+                cout << "\tUpdate aborted...";
+            }
+            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            int op3;
+            cin >> op3;
+            if (op3 == 1) {
+                updateStudents();
+            } else if (op3 == 2) {
+                main();
+            } else {
+                exit(0);
+            }
+        break;
+        case 3:
+            cout << "\n\tEnter Campus: ";
+            cin >> newName;
+            cout << "\n\tConfirmation for data update [Y/n]: ";
+            cin >> choices;
+            if (choices == 'Y' || choices == 'y') {
+                student[snum].update(student, snum, 3, newName, 0);
+                cout << "\tSuccessfully updated...";
+            } else {
+                cout << "\tUpdate aborted...";
+            }
+            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            int op4;
+            cin >> op4;
+            if (op4 == 1) {
+                updateStudents();
+            } else if (op4 == 2) {
+                main();
+            } else {
+                exit(0);
+            }
+        break;
+        case 4:
+        cout << "\n\tEnter Program/Course: ";
+            cin >> newName;
+            cout << "\n\tConfirmation for data update [Y/n]: ";
+            cin >> choices;
+            if (choices == 'Y' || choices == 'y') {
+                student[snum].update(student, snum, 4, newName, 0);
+                cout << "\tSuccessfully updated...";
+            } else {
+                cout << "\tUpdate aborted...";
+            }
+            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            int op5;
+            cin >> op5;
+            if (op5 == 1) {
+                updateStudents();
+            } else if (op5 == 2) {
+                main();
+            } else {
+                exit(0);
+            }
+        break;
+        case 5:
+        cout << "\n\tEnter City: ";
+            cin >> newName;
+            cout << "\n\tConfirmation for data update [Y/n]: ";
+            cin >> choices;
+            if (choices == 'Y' || choices == 'y') {
+                student[snum].update(student, snum, 5, newName, 0);
+                cout << "\tSuccessfully updated...";
+            } else {
+                cout << "\tUpdate aborted...";
+            }
+            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            int op6;
+            cin >> op6;
+            if (op6 == 1) {
+                updateStudents();
+            } else if (op6 == 2) {
+                main();
+            } else {
+                exit(0);
+            }
+        break;
+        case 6:
+        cout << "\n\tEnter Email Address: ";
+            cin >> newName;
+            cout << "\n\tConfirmation for data update [Y/n]: ";
+            cin >> choices;
+            if (choices == 'Y' || choices == 'y') {
+                student[snum].update(student, snum, 6, newName, 0);
+                cout << "\tSuccessfully updated...";
+            } else {
+                cout << "\tUpdate aborted...";
+            }
+            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            int op7;
+            cin >> op7;
+            if (op7 == 1) {
+                updateStudents();
+            } else if (op7 == 2) {
+                main();
+            } else {
+                exit(0);
+            }
+        break;
+        case 7:
+        main();
+        break;
+        default:
+        exit(0);
+        break;
+    }
+}
+
 int main() {
    if (cls) {
        cout << "\033[2J\033[1;1H";
@@ -199,7 +370,7 @@ int main() {
    } else if (num == 2) {
        readStudents();
    } else if (num == 3) {
-       
+       updateStudents();
    } else if (num == 4) {
        deleteStudents();
    } else if (num == 5) {
