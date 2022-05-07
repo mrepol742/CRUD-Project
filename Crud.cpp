@@ -25,6 +25,7 @@ int cls = 1;
 bool isDebug = true;
 int dataLoc = 0;
 int main();
+void faded(int ms);
 
 class Students {
 
@@ -37,6 +38,9 @@ class Students {
 
     public:
     int create(Students *student, int loc) {
+        if (isDebug) {
+            cout << ">> Location " << loc;
+        }
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
         cout << "\n\nName (Last Name, First Name, MI.): ";
         cin >> student[loc].name;
@@ -69,7 +73,7 @@ class Students {
             cout << ">> Entered email address is " << student[loc].emailAddress;
         }
         cout << "\nStudent successfully added.";
-        cout << "\nDo you want to [1] Add another student, [2] Main Menu or [3] Exit: ";
+        cout << "\nDo you want to \e[1m[1]\e[0m Add another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
         dataLoc++;
         int op2;
         cin >> op2;
@@ -86,6 +90,9 @@ class Students {
     }
 
     void update(Students *student, int loc, int type, string newName, int newYearLevel) {
+        if (isDebug) {
+            cout << ">> Location was at " << loc << " type: " << type << " params: " << newName << " && " << newYearLevel;
+        }
         if (type == 1) {
             student[loc].name = newName;
         } else if (type == 2) {
@@ -108,17 +115,17 @@ Students student[230];
 void readStudents() {
     cout << "\n\t\t   \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
     cout << "\n\n\t--------------------------------------------";
-    cout << "\n\t| [1] All Students \t[2] Find a Student |\n\t| [3] Main Menu\t        [4] Exit           |";
+    cout << "\n\t| \e[1m[1]\e[0m All Students \t\e[1m[2]\e[0m Find a Student |\n\t| \e[1m[3]\e[0m Main Menu\t        \e[1m[4]\e[0m Exit           |";
     cout << "\n\t--------------------------------------------";
     cout << "\n\n\tAction: ";
     int num2;
     cin >> num2;
     if (num2 == 1) {
-        cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
+        cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
         for (int i = 0; i < dataLoc; i++) {
              student[i].read();
         }
-        cout << "\n\tDo you want to [1] Main Menu or [2] Exit: ";
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Main Menu or \e[1m[2]\e[0m Exit: ";
         int op;
         cin >> op;
         if (op == 1) {
@@ -132,7 +139,7 @@ void readStudents() {
         if (stun > dataLoc || stun < 0) {
             cout << "\n\tStudent doesn't exists. Try again.";
         } else {
-            cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
+            cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
             student[stun].read();
         }
         readStudents();
@@ -164,7 +171,7 @@ void deleteStudents() {
         cout << "\tStudent doesn't exists. Try again.\n\n";
         deleteStudents();
     } else {
-        cout << "\n\nName\tYear Level\tCampus\tProgram\t  City\t  Email Address";
+        cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
         student[stun].read();
         cout << "\n\tConfirmation for data deletion [Y/n]: ";
         char op;
@@ -184,7 +191,7 @@ void deleteStudents() {
         } else {
             cout << "\tDeletion aborted...";
         }
-        cout << "\n\tDo you want to [1] Delete another data, [2] Main Menu or [3] Exit: ";
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Delete another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
         int op2;
         cin >> op2;
         if (op2 == 1) {
@@ -200,7 +207,7 @@ void deleteStudents() {
 void updateStudents() {
     cout << "\n\t\t   \033[1;31mUpdate Students\033[0m\n\tUpdate Students LMS informations.";
     cout << "\n\n\t-----------------------------------";
-    cout << "\n\t| [1] Name \t[2] Year Level    |\n\t| [3] Campus\t[4] Program       |\n\t| [5] City\t[6] Email Address |\n\t| [7] Main Menu\t[8] Exit          |";
+    cout << "\n\t| \e[1m[1]\e[0m Name \t\e[1m[2]\e[0m Year Level    |\n\t| \e[1m[3]\e[0m Campus\t\e[1m[4]\e[0m Program       |\n\t| \e[1m[5]\e[0m City\t\e[1m[6]\e[0m Email Address |\n\t| \e[1m[7]\e[0m Main Menu\t\e[1m[8]\e[0m Exit          |";
     cout << "\n\t-----------------------------------";
     cout << "\n\n\tAction: ";
     int num2;
@@ -223,7 +230,7 @@ void updateStudents() {
             } else {
                 cout << "\tUpdate aborted...";
             }
-            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
             int op2;
             cin >> op2;
             if (op2 == 1) {
@@ -245,7 +252,7 @@ void updateStudents() {
             } else {
                 cout << "\tUpdate aborted...";
             }
-            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
             int op3;
             cin >> op3;
             if (op3 == 1) {
@@ -267,7 +274,7 @@ void updateStudents() {
             } else {
                 cout << "\tUpdate aborted...";
             }
-            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
             int op4;
             cin >> op4;
             if (op4 == 1) {
@@ -279,7 +286,7 @@ void updateStudents() {
             }
         break;
         case 4:
-        cout << "\n\tEnter Program/Course: ";
+            cout << "\n\tEnter Program/Course: ";
             cin >> newName;
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
@@ -289,7 +296,7 @@ void updateStudents() {
             } else {
                 cout << "\tUpdate aborted...";
             }
-            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
             int op5;
             cin >> op5;
             if (op5 == 1) {
@@ -301,7 +308,7 @@ void updateStudents() {
             }
         break;
         case 5:
-        cout << "\n\tEnter City: ";
+            cout << "\n\tEnter City: ";
             cin >> newName;
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
@@ -311,7 +318,7 @@ void updateStudents() {
             } else {
                 cout << "\tUpdate aborted...";
             }
-            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
             int op6;
             cin >> op6;
             if (op6 == 1) {
@@ -323,7 +330,7 @@ void updateStudents() {
             }
         break;
         case 6:
-        cout << "\n\tEnter Email Address: ";
+            cout << "\n\tEnter Email Address: ";
             cin >> newName;
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
@@ -333,7 +340,7 @@ void updateStudents() {
             } else {
                 cout << "\tUpdate aborted...";
             }
-            cout << "\n\tDo you want to [1] Update another data, [2] Main Menu or [3] Exit: ";
+            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
             int op7;
             cin >> op7;
             if (op7 == 1) {
@@ -357,9 +364,10 @@ int main() {
    if (cls) {
        cout << "\033[2J\033[1;1H";
    }
-   cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m\n\tA simple program in managing students LMS accounts.";
+   cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m";
+   cout << "\n\tA simple program in managing students LMS accounts.";
    cout << "\n\n\t---------------------------------------------";
-   cout << "\n\t| [1] Add New Students\t[2] List Students   |\n\t| [3] Update Students\t[4] Delete Students |\n\t| [5] Exit                                  |";
+   cout << "\n\t| \e[1m[1]\e[0m Add New Students\t\e[1m[2]\e[0m List Students   |\n\t| \e[1m[3]\e[0m Update Students\t\e[1m[4]\e[0m Delete Students |\n\t| \e[1m[5]\e[0m Exit                                  |";
    cout << "\n\t---------------------------------------------";
    cout << "\n\n\tAction: ";
    int num;
