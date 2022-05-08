@@ -107,7 +107,6 @@ class Students {
             student[loc].emailAddress = newName;
         }
     }
-
 };
 
 Students student[230];
@@ -185,7 +184,7 @@ void deleteStudents() {
                             student[j] = student[j+1];
                         }
                     }
-                } 
+                }
             }
             cout << "\tSuccessfully deleted...";
         } else {
@@ -212,6 +211,11 @@ void updateStudents() {
     cout << "\n\n\tAction: ";
     int num2;
     cin >> num2;
+    if (num2 == 7) {
+        main();
+    } else if (num2 == 8) {
+        exit(0);
+    }
     cout << "\tEnter student number: ";
     int snum;
     cin >> snum;
@@ -350,12 +354,6 @@ void updateStudents() {
             } else {
                 exit(0);
             }
-        break;
-        case 7:
-        main();
-        break;
-        default:
-        exit(0);
         break;
     }
 }
