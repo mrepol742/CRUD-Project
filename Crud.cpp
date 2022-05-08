@@ -25,18 +25,25 @@ int cls = 1;
 bool isDebug = true;
 int dataLoc = 0;
 int main();
-void faded(int ms);
 
 class Students {
 
     string name;
-    int yearLevel;
+    int yearLevel = -3;
     string campus;
     string program;
     string city;
     string emailAddress;
 
     public:
+    int nonNull(Students *student, int loc) {
+        if (student[loc].yearLevel == -3) {
+            return 0;
+        }
+        return 1;
+    }
+
+
     int create(Students *student, int loc) {
         if (isDebug) {
             cout << ">> Location " << loc;
@@ -111,8 +118,11 @@ class Students {
 
 Students student[230];
 
+bool nonNullStudents() {
+    return stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0;
+}
 void readStudents() {
-    cout << "\n\t\t   \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
+    cout << "\n\t\t      \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
     cout << "\n\n\t--------------------------------------------";
     cout << "\n\t| \e[1m[1]\e[0m All Students \t\e[1m[2]\e[0m Find a Student |\n\t| \e[1m[3]\e[0m Main Menu\t        \e[1m[4]\e[0m Exit           |";
     cout << "\n\t--------------------------------------------";
@@ -135,7 +145,7 @@ void readStudents() {
         cout << "\tEnter student number: ";
         int stun;
         cin >> stun;
-        if (stun > dataLoc || stun < 0) {
+        if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
             cout << "\n\tStudent doesn't exists. Try again.";
         } else {
             cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
@@ -166,7 +176,7 @@ void deleteStudents() {
     cout << "\tEnter student number: ";
     int stun;
     cin >> stun;
-    if (stun > dataLoc || stun < 0) {
+    if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
         cout << "\tStudent doesn't exists. Try again.\n\n";
         deleteStudents();
     } else {
@@ -197,14 +207,17 @@ void deleteStudents() {
             deleteStudents();
         } else if (op2 == 2) {
             main();
-        } else {
+        } else if (op2 == 3) {
             exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            deleteStudents();
         }
     }
 }
 
 void updateStudents() {
-    cout << "\n\t\t   \033[1;31mUpdate Students\033[0m\n\tUpdate Students LMS informations.";
+    cout << "\n\t\t\033[1;31mUpdate Students\033[0m\n\tUpdate Students LMS informations.";
     cout << "\n\n\t-----------------------------------";
     cout << "\n\t| \e[1m[1]\e[0m Name \t\e[1m[2]\e[0m Year Level    |\n\t| \e[1m[3]\e[0m Campus\t\e[1m[4]\e[0m Program       |\n\t| \e[1m[5]\e[0m City\t\e[1m[6]\e[0m Email Address |\n\t| \e[1m[7]\e[0m Main Menu\t\e[1m[8]\e[0m Exit          |";
     cout << "\n\t-----------------------------------";
@@ -219,6 +232,10 @@ void updateStudents() {
     cout << "\tEnter student number: ";
     int snum;
     cin >> snum;
+    if (snum > dataLoc || snum < 0 || student[0].nonNull(student, stun) == 0) {
+        cout << "\tStudent doesn't exists. Try again.\n\n";
+        updateStudents();
+    }
     string newName;
     char choices;
     int newYearLevel;
@@ -241,8 +258,11 @@ void updateStudents() {
                 updateStudents();
             } else if (op2 == 2) {
                 main();
-            } else {
+            } else if (op2 == 3) {
                 exit(0);
+            } else {
+                cout << "\tInvalid action. Try again.\n\n";
+                updateStudents();
             }
         break;
         case 2:
@@ -263,8 +283,11 @@ void updateStudents() {
                 updateStudents();
             } else if (op3 == 2) {
                 main();
-            } else {
+            } else if (op3 == 3) {
                 exit(0);
+            } else {
+                cout << "\tInvalid action. Try again.\n\n";
+                updateStudents();
             }
         break;
         case 3:
@@ -285,8 +308,11 @@ void updateStudents() {
                 updateStudents();
             } else if (op4 == 2) {
                 main();
-            } else {
+            } else if (op4 == 3) {
                 exit(0);
+            } else {
+                cout << "\tInvalid action. Try again.\n\n";
+                updateStudents();
             }
         break;
         case 4:
@@ -307,8 +333,11 @@ void updateStudents() {
                 updateStudents();
             } else if (op5 == 2) {
                 main();
-            } else {
+            } else if (op5 == 3) {
                 exit(0);
+            } else {
+                cout << "\tInvalid action. Try again.\n\n";
+                updateStudents();
             }
         break;
         case 5:
@@ -329,8 +358,11 @@ void updateStudents() {
                 updateStudents();
             } else if (op6 == 2) {
                 main();
-            } else {
+            } else if (op6 == 3) {
                 exit(0);
+            } else {
+                cout << "\tInvalid action. Try again.\n\n";
+                updateStudents();
             }
         break;
         case 6:
@@ -351,8 +383,11 @@ void updateStudents() {
                 updateStudents();
             } else if (op7 == 2) {
                 main();
-            } else {
+            } else if (op7 == 3) {
                 exit(0);
+            } else {
+                cout << "\tInvalid action. Try again.\n\n";
+                updateStudents();
             }
         break;
     }
