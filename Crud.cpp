@@ -17,7 +17,7 @@
 
 
 #include <iostream>
-#include <iterator>
+#include <string>
 
 using namespace std;
 
@@ -25,6 +25,7 @@ int cls = 1;
 bool isDebug = true;
 int dataLoc = 0;
 int main();
+void updateStudents();
 
 class Students {
 
@@ -43,6 +44,20 @@ class Students {
         return 1;
     }
 
+    void getEmailAddress(Students *student, int loc) {
+        string email;
+        cout << "\nEmail Address: ";
+        cin >> email;
+        if (email.find("@") != string::npos && email.find(".") != string::npos) {
+            student[loc].emailAddress == email;
+        } else {
+            cout << "Invalid Email Address. Try Again.";
+            getEmailAddress(student, loc);
+        }
+        if (isDebug) {
+            cout << ">> Entered email address is " << student[loc].emailAddress;
+        }
+    }
 
     int create(Students *student, int loc) {
         if (isDebug) {
@@ -50,7 +65,8 @@ class Students {
         }
         cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
         cout << "\n\nName (Last Name, First Name, MI.): ";
-        cin >> student[loc].name;
+        cin.ignore();
+        getline(cin, student[loc].name);
         if (isDebug) {
             cout << ">> Entered name is " << student[loc].name;
         }
@@ -60,25 +76,22 @@ class Students {
             cout << ">> Entered year level is " << student[loc].yearLevel;
         }
         cout << "\nCampus: ";
-        cin >> student[loc].campus;
+        cin.ignore();
+        getline(cin, student[loc].campus);
         if (isDebug) {
             cout << ">> Entered campus is " << student[loc].campus;
         }
         cout << "\nProgram/Course: ";
-        cin >> student[loc].program;
+        getline(cin, student[loc].program);
         if (isDebug) {
             cout << ">> Entered program/course is " << student[loc].program;
         }
         cout << "\nCity: ";
-        cin >> student[loc].city;
+        getline(cin, student[loc].city);
         if (isDebug) {
             cout << ">> Entered city is " << student[loc].city;
         }
-        cout << "\nEmail Address: ";
-        cin >> student[loc].emailAddress;
-        if (isDebug) {
-            cout << ">> Entered email address is " << student[loc].emailAddress;
-        }
+        getEmailAddress(student, loc);
         cout << "\nStudent successfully added.";
         cout << "\nDo you want to \e[1m[1]\e[0m Add another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
         dataLoc++;
@@ -118,9 +131,6 @@ class Students {
 
 Students student[230];
 
-bool nonNullStudents() {
-    return stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0;
-}
 void readStudents() {
     cout << "\n\t\t      \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
     cout << "\n\n\t--------------------------------------------";
@@ -216,6 +226,39 @@ void deleteStudents() {
     }
 }
 
+void isValidEmaillAddressUpdate(int snum) {
+    string newName;
+    char choices;
+    cout << "\n\tEnter Email Address: ";
+    cin >> newName;
+    if (newName.find("@") != string::npos && newName.find(".") != string::npos) {
+        cout << "\n\tConfirmation for data update [Y/n]: ";
+        cin >> choices;
+        if (choices == 'Y' || choices == 'y') {
+            student[snum].update(student, snum, 6, newName, 0);
+            cout << "\tSuccessfully updated...";
+        } else {
+            cout << "\tUpdate aborted...";
+        }
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        int op7;
+        cin >> op7;
+        if (op7 == 1) {
+            updateStudents();
+        } else if (op7 == 2) {
+            main();
+        } else if (op7 == 3) {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            updateStudents();
+        }
+    } else {
+        cout << "\tInvalid Email Address. Try Again.";
+        isValidEmaillAddressUpdate(snum);
+    }
+}
+
 void updateStudents() {
     cout << "\n\t\t\033[1;31mUpdate Students\033[0m\n\tUpdate Students LMS informations.";
     cout << "\n\n\t-----------------------------------";
@@ -232,7 +275,7 @@ void updateStudents() {
     cout << "\tEnter student number: ";
     int snum;
     cin >> snum;
-    if (snum > dataLoc || snum < 0 || student[0].nonNull(student, stun) == 0) {
+    if (snum > dataLoc || snum < 0 || student[0].nonNull(student, snum) == 0) {
         cout << "\tStudent doesn't exists. Try again.\n\n";
         updateStudents();
     }
@@ -242,7 +285,8 @@ void updateStudents() {
     switch (num2) {
         case 1:
             cout << "\n\tEnter Name: ";
-            cin >> newName;
+            cin.ignore();
+            getline(cin, newName);
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
             if (choices == 'Y' || choices == 'y') {
@@ -292,7 +336,8 @@ void updateStudents() {
         break;
         case 3:
             cout << "\n\tEnter Campus: ";
-            cin >> newName;
+            cin.ignore();
+            getline(cin, newName);
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
             if (choices == 'Y' || choices == 'y') {
@@ -317,7 +362,8 @@ void updateStudents() {
         break;
         case 4:
             cout << "\n\tEnter Program/Course: ";
-            cin >> newName;
+            cin.ignore();
+            getline(cin, newName);
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
             if (choices == 'Y' || choices == 'y') {
@@ -342,7 +388,8 @@ void updateStudents() {
         break;
         case 5:
             cout << "\n\tEnter City: ";
-            cin >> newName;
+            cin.ignore();
+            getline(cin, newName);
             cout << "\n\tConfirmation for data update [Y/n]: ";
             cin >> choices;
             if (choices == 'Y' || choices == 'y') {
@@ -366,29 +413,7 @@ void updateStudents() {
             }
         break;
         case 6:
-            cout << "\n\tEnter Email Address: ";
-            cin >> newName;
-            cout << "\n\tConfirmation for data update [Y/n]: ";
-            cin >> choices;
-            if (choices == 'Y' || choices == 'y') {
-                student[snum].update(student, snum, 6, newName, 0);
-                cout << "\tSuccessfully updated...";
-            } else {
-                cout << "\tUpdate aborted...";
-            }
-            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-            int op7;
-            cin >> op7;
-            if (op7 == 1) {
-                updateStudents();
-            } else if (op7 == 2) {
-                main();
-            } else if (op7 == 3) {
-                exit(0);
-            } else {
-                cout << "\tInvalid action. Try again.\n\n";
-                updateStudents();
-            }
+            isValidEmaillAddressUpdate(snum);
         break;
     }
 }
