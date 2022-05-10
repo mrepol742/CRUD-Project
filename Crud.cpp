@@ -49,7 +49,7 @@ class Students {
         cout << "\nEmail Address: ";
         cin >> email;
         if (email.find("@") != string::npos && email.find(".") != string::npos) {
-            student[loc].emailAddress == email;
+            student[loc].emailAddress += email;
         } else {
             cout << "Invalid Email Address. Try Again.";
             getEmailAddress(student, loc);
@@ -106,7 +106,7 @@ class Students {
     }
 
     void read() {
-         cout << "\n" << name << " " << yearLevel << " " << campus << " " << program << " " << city << " " << emailAddress;
+         cout << "\n" << name << "\t" << yearLevel << "\t\t" << campus << "\t" << program << "\t" << city << "\t" << emailAddress;
     }
 
     void update(Students *student, int loc, int type, string newName, int newYearLevel) {
@@ -140,7 +140,7 @@ void readStudents() {
     int num2;
     cin >> num2;
     if (num2 == 1) {
-        cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
+        cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
         for (int i = 0; i < dataLoc; i++) {
              student[i].read();
         }
@@ -190,7 +190,7 @@ void deleteStudents() {
         cout << "\tStudent doesn't exists. Try again.\n\n";
         deleteStudents();
     } else {
-        cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
+        cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
         student[stun].read();
         cout << "\n\tConfirmation for data deletion [Y/n]: ";
         char op;
