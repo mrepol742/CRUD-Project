@@ -144,13 +144,10 @@ void readStudents() {
         for (int i = 0; i < dataLoc; i++) {
              student[i].read();
         }
-        cout << "\n\tDo you want to \e[1m[1]\e[0m Main Menu or \e[1m[2]\e[0m Exit: ";
-        int op;
-        cin >> op;
-        if (op == 1) {
-            main();
-        } 
-        exit(0);
+        cout << "\n\tPress Enter to Continue";
+        cin.ignore();
+        cin.get();
+        readStudents();
     } else if (num2 == 2) {
         cout << "\tEnter student number: ";
         int stun;
@@ -158,9 +155,12 @@ void readStudents() {
         if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
             cout << "\n\tStudent doesn't exists. Try again.";
         } else {
-            cout << "\n\n\e[1mName\e[0m\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t  \e[1mEmail Address\e[0m";
+            cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
             student[stun].read();
         }
+        cout << "\n\tPress Enter to Continue";
+        cin.ignore();
+        cin.get();
         readStudents();
     } else if (num2 == 3) {
         main();
@@ -271,6 +271,12 @@ void updateStudents() {
         main();
     } else if (num2 == 8) {
         exit(0);
+    } else if (num2 > 8 || num2 < 0) {
+        cout << "\n\tInvalid action. Try again.";
+        cout << "\n\tPress Enter to Continue";
+        cin.ignore();
+        cin.get();
+        updateStudents();
     }
     cout << "\tEnter student number: ";
     int snum;
