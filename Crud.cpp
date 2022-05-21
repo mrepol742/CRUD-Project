@@ -522,6 +522,7 @@ int main() {
    } else if (num == 6) {
        readDatabase();
    } else if (num == 7) {
+       cout << "\033[2J\033[1;1H";
        exit(0);
    } else {
       cout << "\n\tInvalid action. Try again.";
