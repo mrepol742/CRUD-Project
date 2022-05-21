@@ -1,0 +1,5 @@
+		Learning Module System (LMS)
+	A simple program in managing students LMS accounts.
+Total students: 0
+
+Name			Year Level		Campus	Program	  City		Email Address

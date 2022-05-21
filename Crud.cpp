@@ -18,6 +18,8 @@
 
 #include <iostream>
 #include <string>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -127,6 +129,10 @@ class Students {
             student[loc].emailAddress = newName;
         }
     }
+
+    string backup() {
+         return "\n" + name +  "\t" + to_string(yearLevel) + "\t\t" + campus + "\t" + program + "\t" + city + "\t" + emailAddress;
+    }
 };
 
 Students student[230];
@@ -137,6 +143,44 @@ void checkStudents() {
         cout << "\n\tPress Enter to Continue";
         cin.ignore();
         cin.get();
+        main();
+    }
+}
+
+void readDatabase() {
+    string str;
+    ifstream MyReadFile("students.txt");
+    while (getline (MyReadFile, str)) {
+        cout << "\n" << str;
+    }
+    cout << "\n";
+    MyReadFile.close();
+    cout << "\n\tPress Enter to Continue";
+    cin.ignore();
+    cin.get();
+    main();
+}
+
+void exportDatabase() {
+    checkStudents();
+    ofstream MyFile("students.txt");
+    MyFile << "\t\tLearning Module System (LMS)\n\tA simple program in managing students LMS accounts.\nTotal students: "<< dataLoc << "\n\nName\t\t\tYear Level\t\tCampus\tProgram\t  City\t\tEmail Address";
+    for (int i = 0; i < dataLoc; i++) {
+        MyFile << student[i].backup();
+    }
+    MyFile.close();
+    cout << "\tSuccessfully backup Students database to \e[student.txt\e[0m.\n";
+    cout << "\tDo you want to \e[1m[1]\e[0m Read the file, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+    int op;
+    cin >> op;
+    if (op == 1) {
+        readDatabase();
+    } else if (op == 2) {
+        main();
+    } else if (op == 3) {
+        exit(0);
+    } else {
+        cout << "\n\tInvalid action. Try again.";
         main();
     }
 }
@@ -456,8 +500,11 @@ int main() {
    cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m";
    cout << "\n\tA simple program in managing students LMS accounts.";
    cout << "\n\n\t---------------------------------------------";
-   cout << "\n\t| \e[1m[1]\e[0m Add New Students\t\e[1m[2]\e[0m List Students   |\n\t| \e[1m[3]\e[0m Update Students\t\e[1m[4]\e[0m Delete Students |\n\t| \e[1m[5]\e[0m Exit                                  |";
+   cout << "\n\t| \e[1m[1]\e[0m Add New Students\t\e[1m[2]\e[0m List Students   |\n\t| \e[1m[3]\e[0m Update Students\t\e[1m[4]\e[0m Delete Students |\n\t| \e[1m[5]\e[0m Export Database   \e[1m[6]\e[0m Read Database   |\n\t| \e[1m[7]\e[0m Exit                                  |";
    cout << "\n\t---------------------------------------------";
+   if (dataLoc > 0) {
+       cout << "\n\t\tThere's been " << dataLoc << " enrolled students.";
+   }
    cout << "\n\n\tAction: ";
    int num;
    cin >> num;
@@ -471,6 +518,10 @@ int main() {
    } else if (num == 4) {
        deleteStudents();
    } else if (num == 5) {
+       exportDatabase();
+   } else if (num == 6) {
+       readDatabase();
+   } else if (num == 7) {
        exit(0);
    } else {
       cout << "\n\tInvalid action. Try again.";
