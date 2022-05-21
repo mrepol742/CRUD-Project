@@ -131,7 +131,18 @@ class Students {
 
 Students student[230];
 
+void checkStudents() {
+    if (dataLoc == 0) {
+        cout << "\n\t>> There was no student yet on the database.";
+        cout << "\n\tPress Enter to Continue";
+        cin.ignore();
+        cin.get();
+        main();
+    }
+}
+
 void readStudents() {
+    checkStudents();
     cout << "\n\t\t      \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
     cout << "\n\n\t--------------------------------------------";
     cout << "\n\t| \e[1m[1]\e[0m All Students \t\e[1m[2]\e[0m Find a Student |\n\t| \e[1m[3]\e[0m Main Menu\t        \e[1m[4]\e[0m Exit           |";
@@ -183,12 +194,25 @@ void addStudents() {
 }
 
 void deleteStudents() {
+    checkStudents();
     cout << "\tEnter student number: ";
     int stun;
     cin >> stun;
     if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
-        cout << "\tStudent doesn't exists. Try again.\n\n";
-        deleteStudents();
+        cout << "\t>> Student doesn't exists.";
+        cout << "\n\t>> Do you want to \e[1m[1]\e[0m Try Again, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        int op;
+        cin >> op;
+        if (op == 1) {
+            deleteStudents();
+        } else if (op == 2) {
+            main();
+        } else if (op == 3) {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            main();
+        }
     } else {
         cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
         student[stun].read();
@@ -260,6 +284,7 @@ void isValidEmaillAddressUpdate(int snum) {
 }
 
 void updateStudents() {
+    checkStudents();
     cout << "\n\t\t\033[1;31mUpdate Students\033[0m\n\tUpdate Students LMS informations.";
     cout << "\n\n\t-----------------------------------";
     cout << "\n\t| \e[1m[1]\e[0m Name \t\e[1m[2]\e[0m Year Level    |\n\t| \e[1m[3]\e[0m Campus\t\e[1m[4]\e[0m Program       |\n\t| \e[1m[5]\e[0m City\t\e[1m[6]\e[0m Email Address |\n\t| \e[1m[7]\e[0m Main Menu\t\e[1m[8]\e[0m Exit          |";
@@ -446,7 +471,7 @@ int main() {
    } else if (num == 4) {
        deleteStudents();
    } else if (num == 5) {
-       return 0;
+       exit(0);
    } else {
       cout << "\n\tInvalid action. Try again.";
       main();
