@@ -26,6 +26,7 @@ using namespace std;
 int cls = 1;
 bool isDebug = true;
 int dataLoc = 0;
+
 int main();
 void updateStudents();
 
@@ -97,11 +98,11 @@ class Students {
         cout << "\nStudent successfully added.";
         cout << "\nDo you want to \e[1m[1]\e[0m Add another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
         dataLoc++;
-        int op2;
+        string op2;
         cin >> op2;
-        if (op2 == 1) {
+        if (op2 == "1" || op2 == "a") {
             return 1;
-        } else if (op2 == 3) {
+        } else if (op2 == "3" || op2 == "e") {
             exit(0);
         }
         return 0;
@@ -171,13 +172,13 @@ void exportDatabase() {
     MyFile.close();
     cout << "\tSuccessfully backup Students database to \e[student.txt\e[0m.\n";
     cout << "\tDo you want to \e[1m[1]\e[0m Read the file, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-    int op;
+    string op;
     cin >> op;
-    if (op == 1) {
+    if (op == "1" || op == "r") {
         readDatabase();
-    } else if (op == 2) {
+    } else if (op == "2" || op == "m") {
         main();
-    } else if (op == 3) {
+    } else if (op == "3" || op == "e") {
         exit(0);
     } else {
         cout << "\n\tInvalid action. Try again.";
@@ -192,18 +193,19 @@ void readStudents() {
     cout << "\n\t| \e[1m[1]\e[0m All Students \t\e[1m[2]\e[0m Find a Student |\n\t| \e[1m[3]\e[0m Main Menu\t        \e[1m[4]\e[0m Exit           |";
     cout << "\n\t--------------------------------------------";
     cout << "\n\n\tAction: ";
-    int num2;
+    string num2;
     cin >> num2;
-    if (num2 == 1) {
+    if (num2 == "1" || num2 == "a") {
         cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
-        for (int i = 0; i < dataLoc; i++) {
+        int i;
+        for (i = 0; i < dataLoc; i++) {
              student[i].read();
         }
         cout << "\n\tPress Enter to Continue";
         cin.ignore();
         cin.get();
         readStudents();
-    } else if (num2 == 2) {
+    } else if (num2 == "2" || num2 == "f") {
         cout << "\tEnter student number: ";
         int stun;
         cin >> stun;
@@ -217,9 +219,9 @@ void readStudents() {
         cin.ignore();
         cin.get();
         readStudents();
-    } else if (num2 == 3) {
+    } else if (num2 == "3" || num2 == "m") {
         main();
-    } else if (num2 == 4) {
+    } else if (num2 == "4" || num2 == "e") {
         exit(0);
     } else {
         cout << "\n\tInvalid action. Try again.";
@@ -245,13 +247,13 @@ void deleteStudents() {
     if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
         cout << "\t>> Student doesn't exists.";
         cout << "\n\t>> Do you want to \e[1m[1]\e[0m Try Again, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-        int op;
+        string op;
         cin >> op;
-        if (op == 1) {
+        if (op == "1" || op == "t") {
             deleteStudents();
-        } else if (op == 2) {
+        } else if (op == "2" || op == "m") {
             main();
-        } else if (op == 3) {
+        } else if (op == "3" || op == "e") {
             exit(0);
         } else {
             cout << "\tInvalid action. Try again.\n\n";
@@ -264,13 +266,13 @@ void deleteStudents() {
         char op;
         cin >> op;
         if (op == 'Y' || op == 'y') {
-            for (int i = 0; i < dataLoc; i++) {
-                if (i == stun) {
-                    if (i < dataLoc) {
-                        dataLoc--;
-                        for (int j = i; j < dataLoc; j++) {
-                            student[j] = student[j+1];
-                        }
+            int i;
+            for (i = 0; i < dataLoc; i++) {
+                if (i == stun && i < dataLoc) {
+                    dataLoc--;
+                    int j;
+                    for (j = i; j < dataLoc; j++) {
+                        student[j] = student[j+1];
                     }
                 }
             }
@@ -279,13 +281,13 @@ void deleteStudents() {
             cout << "\tDeletion aborted...";
         }
         cout << "\n\tDo you want to \e[1m[1]\e[0m Delete another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-        int op2;
+        string op2;
         cin >> op2;
-        if (op2 == 1) {
+        if (op2 == "1" || op2 == "d") {
             deleteStudents();
-        } else if (op2 == 2) {
+        } else if (op2 == "2" || op2 == "m") {
             main();
-        } else if (op2 == 3) {
+        } else if (op2 == "3" || op2 == "e") {
             exit(0);
         } else {
             cout << "\tInvalid action. Try again.\n\n";
@@ -309,13 +311,13 @@ void isValidEmaillAddressUpdate(int snum) {
             cout << "\tUpdate aborted...";
         }
         cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-        int op7;
+        string op7;
         cin >> op7;
-        if (op7 == 1) {
+        if (op7 == "1" || op7 == "u") {
             updateStudents();
-        } else if (op7 == 2) {
+        } else if (op7 == "2" || op7 == "m") {
             main();
-        } else if (op7 == 3) {
+        } else if (op7 == "3" || op7 == "e") {
             exit(0);
         } else {
             cout << "\tInvalid action. Try again.\n\n";
@@ -334,18 +336,12 @@ void updateStudents() {
     cout << "\n\t| \e[1m[1]\e[0m Name \t\e[1m[2]\e[0m Year Level    |\n\t| \e[1m[3]\e[0m Campus\t\e[1m[4]\e[0m Program       |\n\t| \e[1m[5]\e[0m City\t\e[1m[6]\e[0m Email Address |\n\t| \e[1m[7]\e[0m Main Menu\t\e[1m[8]\e[0m Exit          |";
     cout << "\n\t-----------------------------------";
     cout << "\n\n\tAction: ";
-    int num2;
+    string num2;
     cin >> num2;
-    if (num2 == 7) {
+    if (num2 == "7" || num2 == "m") {
         main();
-    } else if (num2 == 8) {
+    } else if (num2 == "8" || num2 == "x") {
         exit(0);
-    } else if (num2 > 8 || num2 < 0) {
-        cout << "\n\tInvalid action. Try again.";
-        cout << "\n\tPress Enter to Continue";
-        cin.ignore();
-        cin.get();
-        updateStudents();
     }
     cout << "\tEnter student number: ";
     int snum;
@@ -357,139 +353,135 @@ void updateStudents() {
     string newName;
     char choices;
     int newYearLevel;
-    switch (num2) {
-        case 1:
-            cout << "\n\tEnter Name: ";
-            cin.ignore();
-            getline(cin, newName);
-            cout << "\n\tConfirmation for data update [Y/n]: ";
-            cin >> choices;
-            if (choices == 'Y' || choices == 'y') {
-                student[snum].update(student, snum, 1, newName, 0);
-                cout << "\tSuccessfully updated...";
-            } else {
-                cout << "\tUpdate aborted...";
-            }
-            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-            int op2;
-            cin >> op2;
-            if (op2 == 1) {
-                updateStudents();
-            } else if (op2 == 2) {
-                main();
-            } else if (op2 == 3) {
-                exit(0);
-            } else {
-                cout << "\tInvalid action. Try again.\n\n";
-                updateStudents();
-            }
-        break;
-        case 2:
-            cout << "\n\tEnter Year Level: ";
-            cin >> newYearLevel;
-            cout << "\n\tConfirmation for data update [Y/n]: ";
-            cin >> choices;
-            if (choices == 'Y' || choices == 'y') {
-                student[snum].update(student, snum, 2, "", newYearLevel);
-                cout << "\tSuccessfully updated...";
-            } else {
-                cout << "\tUpdate aborted...";
-            }
-            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-            int op3;
-            cin >> op3;
-            if (op3 == 1) {
-                updateStudents();
-            } else if (op3 == 2) {
-                main();
-            } else if (op3 == 3) {
-                exit(0);
-            } else {
-                cout << "\tInvalid action. Try again.\n\n";
-                updateStudents();
-            }
-        break;
-        case 3:
-            cout << "\n\tEnter Campus: ";
-            cin.ignore();
-            getline(cin, newName);
-            cout << "\n\tConfirmation for data update [Y/n]: ";
-            cin >> choices;
-            if (choices == 'Y' || choices == 'y') {
-                student[snum].update(student, snum, 3, newName, 0);
-                cout << "\tSuccessfully updated...";
-            } else {
-                cout << "\tUpdate aborted...";
-            }
-            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-            int op4;
-            cin >> op4;
-            if (op4 == 1) {
-                updateStudents();
-            } else if (op4 == 2) {
-                main();
-            } else if (op4 == 3) {
-                exit(0);
-            } else {
-                cout << "\tInvalid action. Try again.\n\n";
-                updateStudents();
-            }
-        break;
-        case 4:
-            cout << "\n\tEnter Program/Course: ";
-            cin.ignore();
-            getline(cin, newName);
-            cout << "\n\tConfirmation for data update [Y/n]: ";
-            cin >> choices;
-            if (choices == 'Y' || choices == 'y') {
-                student[snum].update(student, snum, 4, newName, 0);
-                cout << "\tSuccessfully updated...";
-            } else {
-                cout << "\tUpdate aborted...";
-            }
-            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-            int op5;
-            cin >> op5;
-            if (op5 == 1) {
-                updateStudents();
-            } else if (op5 == 2) {
-                main();
-            } else if (op5 == 3) {
-                exit(0);
-            } else {
-                cout << "\tInvalid action. Try again.\n\n";
-                updateStudents();
-            }
-        break;
-        case 5:
-            cout << "\n\tEnter City: ";
-            cin.ignore();
-            getline(cin, newName);
-            cout << "\n\tConfirmation for data update [Y/n]: ";
-            cin >> choices;
-            if (choices == 'Y' || choices == 'y') {
-                student[snum].update(student, snum, 5, newName, 0);
-                cout << "\tSuccessfully updated...";
-            } else {
-                cout << "\tUpdate aborted...";
-            }
-            cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
-            int op6;
-            cin >> op6;
-            if (op6 == 1) {
-                updateStudents();
-            } else if (op6 == 2) {
-                main();
-            } else if (op6 == 3) {
-                exit(0);
-            } else {
-                cout << "\tInvalid action. Try again.\n\n";
-                updateStudents();
-            }
-        break;
-        case 6:
-            isValidEmaillAddressUpdate(snum);
-        break;
+    string actions;
+    if (num2 == "1" || num2 == "n") {
+        cout << "\n\tEnter Name: ";
+        cin.ignore();
+        getline(cin, newName);
+        cout << "\n\tConfirmation for data update [Y/n]: ";
+        cin >> choices;
+        if (choices == 'Y' || choices == 'y') {
+            student[snum].update(student, snum, 1, newName, 0);
+            cout << "\tSuccessfully updated...";
+        } else {
+            cout << "\tUpdate aborted...";
+        }
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        cin >> actions;
+        if (actions == "1" || actions == "u") {
+            updateStudents();
+        } else if (actions == "2" || actions == "m") {
+            main();
+        } else if (actions == "3" || actions == "e") {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            updateStudents();
+        }
+    } else if (num2 == "2" || num2 == "y") {
+        cout << "\n\tEnter Year Level: ";
+        cin >> newYearLevel;
+        cout << "\n\tConfirmation for data update [Y/n]: ";
+        cin >> choices;
+        if (choices == 'Y' || choices == 'y') {
+            student[snum].update(student, snum, 2, "", newYearLevel);
+            cout << "\tSuccessfully updated...";
+        } else {
+            cout << "\tUpdate aborted...";
+        }
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        cin >> actions;
+        if (actions == "1" || actions == "u") {
+            updateStudents();
+        } else if (actions == "2" || actions == "m") {
+            main();
+        } else if (actions == "3" || actions == "e") {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            updateStudents();
+        }
+    } else if (num2 == "3" || num2 == "c") {
+        cout << "\n\tEnter Campus: ";
+        cin.ignore();
+        getline(cin, newName);
+        cout << "\n\tConfirmation for data update [Y/n]: ";
+        cin >> choices;
+        if (choices == 'Y' || choices == 'y') {
+            student[snum].update(student, snum, 3, newName, 0);
+            cout << "\tSuccessfully updated...";
+        } else {
+            cout << "\tUpdate aborted...";
+        }
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        cin >> actions;
+        if (actions == "1" || actions == "u") {
+            updateStudents();
+        } else if (actions == "2" || actions == "m") {
+            main();
+        } else if (actions == "3" || actions == "e") {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            updateStudents();
+        }
+    } else if (num2 == "4" || num2 == "p") {
+        cout << "\n\tEnter Program/Course: ";
+        cin.ignore();
+        getline(cin, newName);
+        cout << "\n\tConfirmation for data update [Y/n]: ";
+        cin >> choices;
+        if (choices == 'Y' || choices == 'y') {
+            student[snum].update(student, snum, 4, newName, 0);
+            cout << "\tSuccessfully updated...";
+        } else {
+            cout << "\tUpdate aborted...";
+        }
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        cin >> actions;
+        if (actions == "1" || actions == "u") {
+            updateStudents();
+        } else if (actions == "2" || actions == "m") {
+            main();
+        } else if (actions == "3" || actions == "e") {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            updateStudents();
+        }
+    } else if (num2 == "5" || num2 == "i") {
+        cout << "\n\tEnter City: ";
+        cin.ignore();
+        getline(cin, newName);
+        cout << "\n\tConfirmation for data update [Y/n]: ";
+        cin >> choices;
+        if (choices == 'Y' || choices == 'y') {
+            student[snum].update(student, snum, 5, newName, 0);
+            cout << "\tSuccessfully updated...";
+        } else {
+            cout << "\tUpdate aborted...";
+        }
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Update another data, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        cin >> actions;
+        if (actions == "1" || actions == "u") {
+            updateStudents();
+        } else if (actions == "2" || actions == "m") {
+             main();
+        } else if (actions == "3" || actions == "e") {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            updateStudents();
+        }
+    } else if (num2 == "6" || num2 == "e") {
+        isValidEmaillAddressUpdate(snum);
+    } else {
+        cout << "\n\tInvalid action. Try again.";
+        cout << "\n\tPress Enter to Continue";
+        cin.ignore();
+        cin.get();
+        updateStudents();
+        
     }
 }
 
@@ -506,22 +498,22 @@ int main() {
        cout << "\n\t\tThere's been " << dataLoc << " enrolled students.";
    }
    cout << "\n\n\tAction: ";
-   int num;
-   cin >> num;
+   string action;
+   cin >> action;
    cls = 0;
-   if (num == 1) {
+   if (action == "1" || action == "a") {
        addStudents();
-   } else if (num == 2) {
+   } else if (action == "2" || action == "l") {
        readStudents();
-   } else if (num == 3) {
+   } else if (action == "3" || action == "u") {
        updateStudents();
-   } else if (num == 4) {
+   } else if (action == "4" || action == "d") {
        deleteStudents();
-   } else if (num == 5) {
+   } else if (action == "5" || action == "e") {
        exportDatabase();
-   } else if (num == 6) {
+   } else if (action == "6" || action == "r") {
        readDatabase();
-   } else if (num == 7) {
+   } else if (action == "7" || action == "x") {
        cout << "\033[2J\033[1;1H";
        exit(0);
    } else {
