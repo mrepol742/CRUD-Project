@@ -23,7 +23,7 @@
 using namespace std;
 
 int cls = 1;
-bool isDebug = true;
+bool isDebug = false;
 int dataLoc = 0;
 
 int main();
@@ -133,6 +133,14 @@ class Students {
     string backup() {
          return "\n" + name +  "\t" + to_string(yearLevel) + "\t\t" + campus + "\t" + program + "\t" + city + "\t" + emailAddress;
     }
+
+    string getName() {
+        return name;
+    }
+
+    string getProgram() {
+        return program;
+    }
 };
 
 Students student[230];
@@ -178,7 +186,7 @@ void exportDatabase() {
     } else if (op == "2" || op == "m") {
         main();
     } else if (op == "3" || op == "e") {
-        exit(0);
+        exit(0);s
     } else {
         cout << "\n\tInvalid action. Try again.";
         main();
@@ -186,7 +194,7 @@ void exportDatabase() {
 }
 
 void readStudents() {
-    checkStudents();
+    checkStudents();                                    
     cout << "\n\t\t      \033[1;31mRead Students\033[0m\n\tReads Students LMS accounts informations.";
     cout << "\n\n\t--------------------------------------------";
     cout << "\n\t| \e[1m[1]\e[0m All Students \t\e[1m[2]\e[0m Find a Student |\n\t| \e[1m[3]\e[0m Main Menu\t        \e[1m[4]\e[0m Exit           |";
@@ -211,7 +219,7 @@ void readStudents() {
         if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
             cout << "\n\tStudent doesn't exists. Try again.";
         } else {
-            cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
+            cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
             student[stun].read();
         }
         cout << "\n\tPress Enter to Continue";
@@ -484,14 +492,26 @@ void updateStudents() {
     }
 }
 
+void showModules() {
+    cout << "\n\n\t\t      \033[1;31mModules\033[0m";
+    cout << "\n\n\t---------------------------------------------";
+    int num;
+    cout << "\n\n\tEnter Student Number: ";
+    cin >> num;
+    cout << "\033[2J\033[1;1H";
+
+    cout << "\n\n\t\t      \033[1;31m" + student[num].name() + "\033[0m";
+    cout << "\n\n\t---------------------------------------------";
+}
+
 int main() {
    if (cls) {
        cout << "\033[2J\033[1;1H";
    }
    cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m";
    cout << "\n\tA simple program in managing students LMS accounts.";
-   cout << "\n\n\t---------------------------------------------";
-   cout << "\n\t| \e[1m[1]\e[0m Add New Students\t\e[1m[2]\e[0m List Students   |\n\t| \e[1m[3]\e[0m Update Students\t\e[1m[4]\e[0m Delete Students |\n\t| \e[1m[5]\e[0m Export Database   \e[1m[6]\e[0m Read Database   |\n\t| \e[1m[7]\e[0m Exit                                  |";
+   cout << "\n\n\t-----------------------------s----------------";
+   cout << "\n\t| \e[1m[1]\e[0m Add New Students\t\e[1m[2]\e[0m List Students   |\n\t| \e[1m[3]\e[0m Update Students\t\e[1m[4]\e[0m Delete Students |\n\t| \e[1m[5]\e[0m Export Database   \e[1m[6]\e[0m Read Database   |\n\t| \e[1m[7]\e[0m Modules           \e[1m[8]\e[0m Exit            |";
    cout << "\n\t---------------------------------------------";
    if (dataLoc > 0) {
        cout << "\n\t\tThere's been " << dataLoc << " enrolled students.";
@@ -512,7 +532,9 @@ int main() {
        exportDatabase();
    } else if (action == "6" || action == "r") {
        readDatabase();
-   } else if (action == "7" || action == "x") {
+   } else if (action == "7" || action == "m") {
+       showModules();
+   } else if (action == "8" || action == "x") {
        cout << "\033[2J\033[1;1H";
        exit(0);
    } else {

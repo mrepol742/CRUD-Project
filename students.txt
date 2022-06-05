@@ -1,7 +1,0 @@
-		Learning Module System (LMS)
-	A simple program in managing students LMS accounts.
-Total students: 2
-
-Name			Year Level		Campus	Program	  City		Email Address
-Repol, Melvin Jones G.	23232		Calooca City	BSIT	Caloocan City	mrepol742@gmail.com
-James, John Not A.	2002		Caloocan City	BSIT	Caloocan City	mrepol742@gmail.com
