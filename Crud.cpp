@@ -141,6 +141,10 @@ class Students {
     string getProgram() {
         return program;
     }
+
+    int getYearLevel() {
+        return yearLevel;
+    }
 };
 
 Students student[230];
@@ -186,7 +190,7 @@ void exportDatabase() {
     } else if (op == "2" || op == "m") {
         main();
     } else if (op == "3" || op == "e") {
-        exit(0);s
+        exit(0);
     } else {
         cout << "\n\tInvalid action. Try again.";
         main();
@@ -498,10 +502,72 @@ void showModules() {
     int num;
     cout << "\n\n\tEnter Student Number: ";
     cin >> num;
-    cout << "\033[2J\033[1;1H";
 
-    cout << "\n\n\t\t      \033[1;31m" + student[num].name() + "\033[0m";
+    cout << "\n\n\t\033[1;31m" + student[num].getName() + "\033[0m - " << student[num].getProgram() << " Year " << student[num].getYearLevel();
+    cout << "\n\n\tSubjects:\n";
+    string program = student[num].getProgram();
+    int yearLevel = student[num].getYearLevel();
+    if (program == "BSIT" || program == "IT") {
+        switch (yearLevel) {
+            case 1:
+            cout << "\n\t\tFirst Sem\n\t⊛ Computer Programming 1\n\t⊛ Introduction to Computing\n\t⊛ Social and Professional Issues in Computing\n\t⊛ Literacy/Civic Welfare/Military Science 1\n\t⊛ Physical Education 1\n\t⊛ The Contemporary World\n\t⊛ Understanding the Self\n\n\t\tSecond Sem\n\t⊛ Computer Programmign 2\n\t⊛ Data Structures and Algorithms\n\t⊛ Fundamentals of Database Systems\n\t⊛ Literacy/Civic Welfare/Military Science 2\n\t⊛ Physical Education 2\n\t⊛ Mathematics in the Modern World\n\t⊛ Purposive Communication\n\t⊛ Readings in Philippine History";
+            break;
+            case 2:
+            cout << "\n\t\tFirst Sem\n\t⊛ Business Process Management\n\t⊛ Computer Programmign 3\n\t⊛ Applications Development and Emerging Technologies\n\t⊛ Discrete Mathematics for ITE\n\t⊛ Information Management\n\t⊛ Application of Statistics in IT\n\t⊛ Hardware, Software, and Peripherals\n\t⊛ Physical Education 3\n\n\t\tSecond Sem\n\t⊛ Data Analytics\n\t⊛ Human Computer Interaction\n\t⊛ Information Assurance and Security 1\n\t⊛ Integrative Programming and Technologies 1\n\t⊛ Networking 1\n\t⊛ Systems Analysis, Design and Prototyping\n\t⊛ Physical Education 4\n\t⊛ GE Eletive 1";
+            break;
+            case 3:
+            cout << "\n\t\tFirst Sem\n\t⊛ Information Assurance and Security 2\n\t⊛ Networking 2\n\t⊛ Systems Integration and Architecture\n\t⊛ Professional Elective 1\n\t⊛ Methods of Research for IT/IS\n\t⊛ Multimedia Systems\n\t⊛ Ethics\n\t⊛ Life and Works of Rizal\n\n\t\tSecond Sem\n\t⊛ Networking 3\n\t⊛ Professional Eletive 2\n\t⊛ Numerical Analysis for ITE\n\t⊛ Capstone Project and Research 1\n\t⊛ Art Appreciation\n\t⊛ Science, Technology, and Society\n\t⊛ GE Elective 2\n\t⊛ Effective Communication with Personality Development";
+            break;
+            case 4:
+            cout << "\n\t\tFist Sem\n\t⊛ Certification Course\n\t⊛ Systems Administration and Maintenance\n\t⊛ Professional Elective 3\n\t⊛ Professional Elective 4\n\t⊛ Capstone Project and Research 2\n\t⊛ Quantitative Methods (including Modeling and Simulation)\n\t⊛ GE Elective 3\n\n\t\tSecond Sem\n\t⊛ Practicum for IT/IS";
+            break;
+
+        }
+    } else if (program == "BSHM" || program == "HM") {
+        switch (yearLevel) {
+            case 1:
+            cout << "\n\t\tFirst Sem\n\t⊛ Kontekstwalisadong Komunikasyon sa Filipino\n\t⊛ The Contemporary World\n\t⊛ Purposive Communication\n\t⊛ Understanding the Self\n\t⊛ Kitchen Essentials & Basic Food Preparation\n\t⊛ CWTS/ROTC 1\n\t⊛ Self-Testing Activities\n\t⊛ Macro Perspective of Tourism and Hospitality\n\t⊛ Risk Management as Applied to Safety, Security and Sanitation\n\n\t\tSecond Sem\n\t⊛ Filipino sa ibat ibang Disiplina\n\t⊛ Ethics\n\t⊛ Mathematics in the Modern World\n\t⊛ Readings in Philippine History\n\t⊛ Fundamentals in Lodging Operations\n\t⊛ Business Communication\n\t⊛ CWTS/ROTC\n\t⊛ Rhythmic Activities\n\t⊛ Quality Service Management in Tourism and Hospitality";
+            break;
+            case 2:
+            cout << "\n\t\tFist Sem\n\t⊛ Living in the IT Era\n\t⊛ Science Technology and Society\n\t⊛ Catering Management\n\t⊛ Applied Business Tools and Technologies\n\t⊛ Supply Chain Management in Hospitality Industry\n\t⊛ Foreign Language 1(Spanish 1)\n\t⊛ Games and Sports\n\t⊛ Rizals Life and Works\n\t⊛ Philippine Culture and Tourism Geography\n\n\t\tSecond Sem\n\t⊛ Art Appreciation\n\t⊛ Housekeeping Operations\n\t⊛ Fundamentals in Food Service Operators\n\t⊛ Introduction to MICE\n\t⊛ Foreign Language 2(Spanish 2)\n\t⊛ Recreational Activities\n\t⊛ Micro Perspective of Tourism and Hospitality";
+            break;
+            case 3:
+            cout << "\n\t\tFirst Sem\n\t⊛ Operations Management in Tourism and Hospitality Industry Gender and Society\n\t⊛ Asian Cuisine\n\t⊛ Front Office Operation\n\t⊛ Professional Development and Applied Ethics\n\t⊛ Tourism and Hospitality Marketing\n\n\t\tSecond Sem\n\t⊛ Strategic Management in Tourism and Hospitality\n\t⊛ Total Quality Management\n\t⊛ Bar and Beverage Managament\n\t⊛ Ergonomics and Facilities Planning for the Hospitality Industry\n\t⊛ Entrepreneurship in Tourism and Hospitality\n\t⊛ Legal Aspects in Tourisn and Hospitality\n\t⊛ Multicultural Diversity in Workplace for the Tourism Professional";
+            break;
+            case 4:
+            cout << "\n\t\tFirst Sem\n\t⊛ Recreation and Leisure Management\n\t⊛ Research in Hospitality\n\t⊛ Literatures in the Contemporary World\n\n\t\tSecond Sem\n\t⊛ Practicum - Hotel & Restaurant Practicum (600 Hours)";
+            break;
+        }
+    } else if (program == "BEED" || program == "ED") {
+        switch (yearLevel) {
+            case 1:
+            cout << "\n\t\tFirst Sem\n\t⊛ Understanding the Self\n\t⊛ Readings in Philippine History\n\t⊛ Purposive Communication\n\t⊛ The Contemporary World\n\t⊛ The Child and Adolescent Learners and Learning Principles\n\t⊛ The Teaching Profession\n\t⊛ Wika at Kultura sa Mapayapang Lipunan\n\t⊛ Exercise Prescription and Management\n\t⊛ National Service Training Program 1\n\n\t\tSecond Sem\n\t⊛ History of MINSUPALA\n\t⊛ The Teacher and Community, School Culture and Organizational Leadership\n\t⊛ Facilitating Learner-Centered Teaching\n\t⊛ Art Appreciation\n\t⊛ School-Community Linkages\n\t⊛ Life and Works of Rizal\n\t⊛ Good Manners and Right Conduct\n\t⊛ Dance/Martial Arts\n\t⊛ National Service Training Program 2";
+            break;
+            case 2:
+            cout << "\n\t\tFirst Sem\n\t⊛ Ethics\n\t⊛ Mathematics in the Modern World\n\t⊛ Assessment in Learning 1\n\t⊛ The Teacher and School Curriculum\n\t⊛ Teaching Social Studies in the Elementary\n\t⊛ Ekokristisismo at Pagpapahalaga sa Kalikasan\n\t⊛ Individual/Dual Sports/Traditional/Recreational Games\n\n\t\tSecond Sem\n\t⊛ Teaching Science in the Elementary\n\t⊛ Inobasyon sa Wikang Filipino\n\t⊛ Assessment in Learning 2\n\t⊛ Teaching Beginning Reading\n\t⊛ Building and Enhancing New Literacies Across the Curriculum\n\t⊛ Teaching Math in Primary Grades\n\t⊛ Edukasyong Pantahanan at Pangkabuhayan\n\t⊛ Team Sports";
+            break;
+            case 3:
+            cout << "\n\t\tFirst Sem\n\t⊛ Technology for Teaching and Elementary Grades\n\t⊛ Teaching Social Studies in the Elementary\n\t⊛ Pagtuturo and Filipino sa Elementarya\n\t⊛ Teaching PE and Health in the Elementary\n\t⊛ Teaching Math in the Intermediate\n\t⊛ Teaching English in the Elementary\n\t⊛ Content and pedagogy for the Mother-Tongue\n\t⊛ Teaching Multi-Grade\n\n\t\tSecond Sem\n\t⊛ Foundation of Inclusive and Special Education\n\t⊛ Teaching English in the Elementary Grades\n\t⊛ Edukasyon Pantahanan at Pangkabuhayan with Entrpreneurship\n\t⊛ Teaching Music in the Elementary\n\t⊛ Teaching Science in the Elementary\n\t⊛ Teaching Arts in the Elementary\n\t⊛ Research Methods";
+            break;
+            case 4:
+            cout << "\n\t\tFirst Sem\n\t⊛ Observation of Teaching-Learning in Actual School Environment\n\t⊛ Participating and Teaching Assistantship\n\t⊛ Undergradute Thesis\n\n\t\tSecond Sem\n\t⊛ Teaching Internship";
+            break;
+        }
+    }
     cout << "\n\n\t---------------------------------------------";
+    cout << "\n\tDo you want to \e[1m[1]\e[0m View another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+    string actions;
+        cin >> actions;
+        if (actions == "1" || actions == "u") {
+            showModules();
+        } else if (actions == "2" || actions == "m") {
+             main();
+        } else if (actions == "3" || actions == "e") {
+            exit(0);
+        } else {
+            cout << "\tInvalid action. Try again.\n\n";
+            showModules();
+        }
 }
 
 int main() {
