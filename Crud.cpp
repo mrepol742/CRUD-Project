@@ -48,12 +48,12 @@ class Students {
 
     void getEmailAddress(Students *student, int loc) {
         string email;
-        cout << "\nEmail Address: ";
+        cout << "\tEmail Address: ";
         cin >> email;
         if (email.find("@") != string::npos && email.find(".") != string::npos) {
             student[loc].emailAddress += email;
         } else {
-            cout << "Invalid Email Address. Try Again.";
+            cout << "\tInvalid Email Address. Try Again.\n";
             getEmailAddress(student, loc);
         }
         if (isDebug) {
@@ -65,37 +65,39 @@ class Students {
         if (isDebug) {
             cout << ">> Location " << loc;
         }
-        cout << "\n\t\t   \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.";
-        cout << "\n\nName (Last Name, First Name, MI.): ";
+        cout << "\n\t\t       \033[1;31mNew Students\033[0m\n\tPlease Fill up the following required information.\n";
+        cout << "\n\tName (Last Name, First Name, MI.): ";
         cin.ignore();
         getline(cin, student[loc].name);
         if (isDebug) {
             cout << ">> Entered name is " << student[loc].name;
         }
-        cout << "\nYear Level: ";
+        cout << "\tYear Level: ";
         cin >> student[loc].yearLevel;
         if (isDebug) {
             cout << ">> Entered year level is " << student[loc].yearLevel;
         }
-        cout << "\nCampus: ";
+        cout << "\tCampus Location: ";
         cin.ignore();
         getline(cin, student[loc].campus);
         if (isDebug) {
             cout << ">> Entered campus is " << student[loc].campus;
         }
-        cout << "\nProgram/Course: ";
+        cout << "\tProgram (BSIT, BEED, BSHM, BSP): ";
         getline(cin, student[loc].program);
         if (isDebug) {
             cout << ">> Entered program/course is " << student[loc].program;
         }
-        cout << "\nCity: ";
+        cout << "\tCity: ";
         getline(cin, student[loc].city);
         if (isDebug) {
             cout << ">> Entered city is " << student[loc].city;
         }
         getEmailAddress(student, loc);
-        cout << "\nStudent successfully added.";
-        cout << "\nDo you want to \e[1m[1]\e[0m Add another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
+        cout << "\n\tStudent Name: " << student[loc].name;
+        cout << "\n\tStudent ID: " << loc;
+        cout << "\n\tSuccessfully enrolled to the program " << student[loc].program << "!";
+        cout << "\n\tDo you want to \e[1m[1]\e[0m Add another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
         dataLoc++;
         string op2;
         cin >> op2;
@@ -108,7 +110,7 @@ class Students {
     }
 
     void read() {
-         cout << "\n" << name << "\t" << yearLevel << "\t\t" << campus << "\t" << program << "\t" << city << "\t" << emailAddress;
+         cout << "\n\t" << name << "\t" << yearLevel << "\t\t" << campus << "\t" << program << "\t" << city << "\t" << emailAddress;
     }
 
     void update(Students *student, int loc, int type, string newName, int newYearLevel) {
@@ -207,7 +209,7 @@ void readStudents() {
     string num2;
     cin >> num2;
     if (num2 == "1" || num2 == "a") {
-        cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
+        cout << "\n\n\t\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
         int i;
         for (i = 0; i < dataLoc; i++) {
              student[i].read();
@@ -223,7 +225,7 @@ void readStudents() {
         if (stun > dataLoc || stun < 0 || student[0].nonNull(student, stun) == 0) {
             cout << "\n\tStudent doesn't exists. Try again.";
         } else {
-            cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
+            cout << "\n\n\t\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\e[1mCampus\e[0m\t\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
             student[stun].read();
         }
         cout << "\n\tPress Enter to Continue";
@@ -271,7 +273,7 @@ void deleteStudents() {
             main();
         }
     } else {
-        cout << "\n\n\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
+        cout << "\n\n\t\e[1mName\e[0m\t\t\t\e[1mYear Level\e[0m\t\t\e[1mCampus\e[0m\t\e[1mProgram\e[0m\t  \e[1mCity\e[0m\t\t\e[1mEmail Address\e[0m";
         student[stun].read();
         cout << "\n\tConfirmation for data deletion [Y/n]: ";
         char op;
@@ -553,6 +555,21 @@ void showModules() {
             cout << "\n\t\tFirst Sem\n\t⊛ Observation of Teaching-Learning in Actual School Environment\n\t⊛ Participating and Teaching Assistantship\n\t⊛ Undergradute Thesis\n\n\t\tSecond Sem\n\t⊛ Teaching Internship";
             break;
         }
+    } else if (program == "BSP" || program == "P") {
+        switch (yearLevel) {
+            case 1:
+            cout << "\n\t\tFirst Sem\n\t⊛ Readings in Philippine History\n\t⊛ Art Appreciation\n\t⊛ Understanding the Self\n\t⊛ Introduction to Psychology\n\t⊛ Physical Fitness, Gymnastics and Aerobics\n\t⊛ Kontekswalisadong Komunikasyon sa Filipino\n\t⊛ Sosyedad at Literatura/Panitikang Panlipunan\n\t⊛ National Service Training Program 1\n\n\t\tSecond Sem\n\t⊛ Mathematics in the Modern World\n\t⊛ Purposive Communication\n\t⊛ Science, Technology and Society\n\t⊛ Development Psychology\n\t⊛ Filipino sa ibat ibang Disiplina\n\t⊛ National Service Training Program 2\n\t⊛ Rhythmic Activities";
+            break;
+            case 2:
+            cout << "\n\t\tFirst Sem\n\t⊛ Ethics\n\t⊛ The Contemporary World\n\t⊛ Physiological/Biological Psyhology\n\t⊛ Cognitive Psychology\n\t⊛ Thoeries of Personality\n\t⊛ Fundamentals of Biology\n\t⊛ Retorika Masining na Pagpapahayag\n\t⊛ Individual and Dual Sports\n\n\t\tSecond Sem\n\t⊛ The Life and Works of Rizal\n\t⊛ Psychological Assessment\n\t⊛ Culture and Psychology\n\t⊛ Experimental Psychology\n\t⊛ Disaster and Mental Health\n\t⊛ ASEAN Literature\n\t⊛ Team Sports";
+            break;
+            case 3:
+            cout << "\n\t\tFirst Sem\n\t⊛ Human Resource Management with Labor Relations\n\t⊛ Abnormal Psychology\n\t⊛ Social Psychology\n\t⊛ Industrial/Organizational Psychology\n\t⊛ Fundamentals of Chemistry\n\n\t\tSecond Sem\n\t⊛ Field Methods in Pyschology\n\t⊛ Clinical Psychology\n\t⊛ Research in Pyschology 1\n\t⊛ Biochemistry";
+            break;
+            case 4:
+            cout << "\n\t\tFirst Sem\n\t⊛ Praticum in Psychology 200 hours\n\tI. Clinical Setting - 200 hours\n\tII. Industrial Setting - 200 hours\n\tIII. Educational Setting - 200 hours\n\n\t\tSecond Sem\n\t⊛ Research in Psychology 2\n\t⊛ General Zoology\n\t⊛ Group Dynamics\n\t⊛ Psychology Board Review Program";
+            break;
+        }
     }
     cout << "\n\n\t---------------------------------------------";
     cout << "\n\tDo you want to \e[1m[1]\e[0m View another student, \e[1m[2]\e[0m Main Menu or \e[1m[3]\e[0m Exit: ";
@@ -576,7 +593,7 @@ int main() {
    }
    cout << "\n\n\t\t   \033[1;31mLearning Module System (LMS)\033[0m";
    cout << "\n\tA simple program in managing students LMS accounts.";
-   cout << "\n\n\t-----------------------------s----------------";
+   cout << "\n\n\t---------------------------------------------";
    cout << "\n\t| \e[1m[1]\e[0m Add New Students\t\e[1m[2]\e[0m List Students   |\n\t| \e[1m[3]\e[0m Update Students\t\e[1m[4]\e[0m Delete Students |\n\t| \e[1m[5]\e[0m Export Database   \e[1m[6]\e[0m Read Database   |\n\t| \e[1m[7]\e[0m Modules           \e[1m[8]\e[0m Exit            |";
    cout << "\n\t---------------------------------------------";
    if (dataLoc > 0) {
