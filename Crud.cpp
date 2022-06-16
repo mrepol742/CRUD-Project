@@ -2,7 +2,7 @@
  *
  * Copyright (c) 2022 Melvin Jones Repol (mrepol742.github.io). All Rights Reserved.
  *
- * License under the Mrepol742 License, version 1.0 (the "License");
+ * License under the GNU General Public License, version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
